@@ -14,7 +14,7 @@ const FeaturedRows = ({ title, description, id }) => {
     *[_type == "featured" && _id == $id] {
         ...,
         restaurants[]->{
-            ...,s
+            ...,
             dishes[]->,
             type->{
                 name
@@ -25,9 +25,9 @@ const FeaturedRows = ({ title, description, id }) => {
         ).then((data) => {
             setRestaurants(data?.restaurants)
         })
-        console.log(restaurants)
     }, [])
 
+    console.log(restaurants)
 
     return (
         <View>
@@ -48,7 +48,7 @@ const FeaturedRows = ({ title, description, id }) => {
                 showsHorizontalScrollIndicator={false}
                 className="pt-4">
 
-                {restaurants?.map(restaurant => {
+                {restaurants?.map((restaurant) => (
 
                     <RestaurantCard
                         key={restaurant._id}
@@ -63,7 +63,7 @@ const FeaturedRows = ({ title, description, id }) => {
                         long={restaurant.long}
                         lat={restaurant.lat}
                     />
-                })}
+                ))}
 
 
 
