@@ -5,10 +5,12 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Icon } from "@rneui/themed";
 
+
 import Categories from '../components/Categories';
 import CategoryCard from '../components/CategoryCard';
 import FeaturedRows from '../components/FeaturedRows';
 import sanityClient from '../sanity';
+import category from '../sanity/schemas/category';
 
 
 export default function HomeScreen() {
@@ -35,7 +37,7 @@ export default function HomeScreen() {
         })
     }, [])
 
-    console.log(featuredCategories)
+    // console.log(featuredCategories)
 
     return (
         <SafeAreaView className="bg-white pt-5">
@@ -81,21 +83,16 @@ export default function HomeScreen() {
 
 
                 <Categories />
-                <FeaturedRows
-                    id="123"
-                    title="featured"
-                    description="Paid placement from our partners"
-                />
-                <FeaturedRows
-                    id="1234"
-                    title="Tasty Discounts"
-                    description="Everyone's been enjoying these juicy discounts"
-                />
-                <FeaturedRows
-                    id="12345"
-                    title="Offers near you!"
-                    description="Why not support your local restaurants tonight!"
-                />
+                {featuredCategories?.map((category) => (
+
+                    <FeaturedRows
+                        key={category._id}
+                        id={category._id}
+                        title={category.name}
+                        description={category.short_description}
+                    />
+                ))}
+
             </ScrollView>
 
         </SafeAreaView>
