@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import BaseController from './server/server/utils/baseController'
-import { logger } from './server/server/utils/Logger'
+import BaseController from './server/utils/baseController'
+import { logger } from './server/utils/Logger'
 
 
 export class Paths {
@@ -14,7 +14,7 @@ export class Paths {
   }
 
   static get Controllers() {
-    return this.Server + '/server/Controllers'
+    return this.Server + '/Controllers'
   }
 
 

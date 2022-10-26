@@ -1,5 +1,6 @@
-import { RegisterControllers } from "../../../Setup"
+
 import express from 'express'
+import { RegisterControllers } from '../../Setup'
 
 export class StartUp {
 
