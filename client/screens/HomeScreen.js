@@ -4,7 +4,8 @@ import { View, Text, SafeAreaView, Image, TextInput, ScrollView } from 'react-na
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Icon } from "@rneui/themed";
-
+import api from "../services/AxiosService"
+import axios from 'axios'
 
 import Categories from '../components/Categories';
 import CategoryCard from '../components/CategoryCard';
@@ -15,8 +16,9 @@ import category from '../sanity/schemas/category';
 
 export default function HomeScreen() {
     const navigation = useNavigation();
-
     const [featuredCategories, setFeaturedCategories] = useState([])
+    const [post, setPost] = useState(null)
+    const baseURL = "http://localhost:3000/api/login";
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -34,10 +36,16 @@ export default function HomeScreen() {
         }
         }`).then((data) => {
             setFeaturedCategories(data);
-        })
-    }, [])
+        }),
+            axios.get(baseURL).then((res) => {
+                setPost(res.data)
+            })
+    }, [],
+    )
 
-    // console.log(featuredCategories)
+
+
+    console.log(post, 'This is working')
 
     return (
         <SafeAreaView className="bg-white pt-5">
