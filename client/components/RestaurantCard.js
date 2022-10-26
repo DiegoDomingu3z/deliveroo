@@ -4,6 +4,7 @@ import React from 'react'
 import { Icon } from "@rneui/themed";
 import { urlFor } from '../sanity';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios'
 
 const RestaurantCard = ({
     id,
