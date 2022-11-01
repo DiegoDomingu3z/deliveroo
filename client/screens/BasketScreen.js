@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { Icon } from '@rneui/base'
 import { faCircleXmark, faMugSaucer } from '@fortawesome/free-solid-svg-icons'
 import { urlFor } from '../sanity'
+import axios from 'axios'
 
 
 const BasketScreen = () => {
@@ -22,6 +23,14 @@ const BasketScreen = () => {
     const orderTotal = fee + total
     const dispatch = useDispatch()
     const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([])
+    const baseUrl = "http://localhost:3000/api/login"
+    const [itemsBought, setItemsBought] = useState([])
+
+    const article = { title: 'React POST Request Example' };
+    const buyNow = async (Event) => {
+        const res = await axios.post(baseUrl, groupedItemsInBasket)
+        console.log(res)
+    }
 
     useEffect(() => {
         const groupedItems = items.reduce((results, item) => {
@@ -29,8 +38,10 @@ const BasketScreen = () => {
             return results;
         }, {})
         setGroupedItemsInBasket(groupedItems)
+
     }, [items])
-    console.log(groupedItemsInBasket, "this is working")
+
+
     return (
         <SafeAreaView className='flex-1 bg-white'>
             <View className='flex-1 bg-gray-100'>
@@ -89,7 +100,7 @@ const BasketScreen = () => {
                             ${orderTotal.toFixed(2)}
                         </Text>
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Ordering')} className='rounded-lg bg-[#00CCBB] p-4'>
+                    <TouchableOpacity type="Submit" onPress={buyNow} className='rounded-lg bg-[#00CCBB] p-4'>
                         <Text className='text-center text-white text-lg font-bold'>Place Order</Text>
                     </TouchableOpacity>
                 </View>
